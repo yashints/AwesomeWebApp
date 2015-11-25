@@ -4,9 +4,10 @@
     ViewBag.Title = "AAD Auth (Authentication/Authorization)";
 
     var appSettings = System.Configuration.ConfigurationManager.AppSettings;
-    var backgroundColor = appSettings["background"] == null ? "#000000" : appSettings["background"]; 
+    var backgroundColor = appSettings["background"] == null ? "#000000" : appSettings["background"];
     //new line second test
 
+    string apiPrefix = "/.auth";
 }
 
 @using System.Security.Claims
@@ -16,7 +17,6 @@
 <h1>Authentication and Authorization Demo (Easy-Auth)</h1>
 <div class="container">
 
-    <a href="http://@Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME")-staging.azurewebsites.net/EasyAuth" target="_blank">Open Staging Slot</a>
     <br /><br />
     <div style="font-family:Arial; background: @backgroundColor; color:white;">
         @{
@@ -42,10 +42,31 @@
                     </tbody>
                 </table>
                 <br />
+                <div><stong>Available Tokens</stong></div>
+                <table border="1" id="tokenTable">
+                    <tbody>
+
+                    </tbody>
+                </table>
             }
             else
             {
                 <div style="color:red">Current request is unauthenticated!</div>
+                <div>
+                    <a href="@string.Concat(apiPrefix, "/login/aad")">Sign-in with Azure AD</a>
+                </div>
+                <div>
+                    <a href="@string.Concat(apiPrefix, "/login/facebook")">Sign-in with Facebook</a>
+                </div>
+                <div>
+                    <a href="@string.Concat(apiPrefix, "/login/twitter")">Sign-in with Twitter</a>
+                </div>
+                <div>
+                    <a href="@string.Concat(apiPrefix, "/login/microsoftaccount")">Sign-in with Microsoft Account</a>
+                </div>
+                <div>
+                    <a href="@string.Concat(apiPrefix, "/login/google")">Sign-in with Google</a>
+                </div>
             }
         }
 
@@ -76,4 +97,18 @@
     </div>
 
 </div>
+<script>
+    var tokenTableBody = $('#tokenTable tbody');
+    var currentUserApiPath = "@{
+        string path;
+        path = apiPrefix + "/me";
 
+        @path;
+    }";
+
+    $.getJSON(currentUserApiPath, function(data) {
+        $.each(data, function(key, val) {
+            tokenTableBody.append('<tr><td>' + key + '</td><td>' + JSON.stringify(val) + '</td></tr>');
+        });
+    });
+</script>
