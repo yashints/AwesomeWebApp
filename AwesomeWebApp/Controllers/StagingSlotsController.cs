@@ -75,6 +75,12 @@ namespace AwesomeWebApp.Controllers
                     ViewBag.noneStickSetting = WebConfigurationManager.AppSettings["NONE_STICK_SETTING"].ToString();
                 }
 
+                // get none sticky setting
+                if (!string.IsNullOrEmpty(WebConfigurationManager.AppSettings["SLOT_SETTING"]))
+                {
+                    ViewBag.slotSettig = WebConfigurationManager.AppSettings["SLOT_SETTING"].ToString();
+                }
+
                 // set default crash rate for display
                 ViewBag.realCrashRate = 0.0;
             }
