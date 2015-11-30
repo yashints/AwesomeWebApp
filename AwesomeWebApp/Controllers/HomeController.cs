@@ -13,7 +13,7 @@ namespace AwesomeWebApp.Controllers
 
         public ActionResult Index()
         {
-           // ViewBag.CityName = getCityName();
+            ViewBag.CityName = getCityName();
             return View();
         }
 

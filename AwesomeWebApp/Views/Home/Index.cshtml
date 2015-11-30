@@ -16,24 +16,6 @@
 </div>
 
 
-@*@{
-    if (System.Configuration.ConfigurationManager.AppSettings["STAGE"] == "true")
-    {
-        <div class="jumbotron">
-            <h1>Azure Web App STAGE </h1>
-            <p class="lead">Awesome Web App is running on Azure Web App.</p>
-        </div>
-    }
-    else
-    {
-        <div class="jumbotron">
-            <h1>Azure Web App </h1>
-            <p class="lead">Awesome Web App is running on Azure Web App.</p>
-        </div>
-    }
-}*@
-
-
 <div class="row">
     <div class="col-md-4 text-center">
         <p><a class="btn btn-lg btn-danger" href="~/ProduceError/500">500 Error!</a></p>
