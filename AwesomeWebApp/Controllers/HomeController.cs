@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace AwesomeWebApp.Controllers
@@ -12,7 +13,20 @@ namespace AwesomeWebApp.Controllers
 
         public ActionResult Index()
         {
+           // ViewBag.CityName = getCityName();
             return View();
+        }
+
+        private dynamic getCityName()
+        {
+            string cityName = WebConfigurationManager.AppSettings["CITY_NAME"];
+            if(string.IsNullOrEmpty(cityName))
+            {
+                // TODO: what do we do if no config param?
+                throw new NotImplementedException();
+            }
+
+            return cityName;
         }
 
         public ActionResult ProduceError(int errorCode)
